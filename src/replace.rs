@@ -49,6 +49,7 @@ pub fn start_thread_search(
                     //key found in section -> update
                     res.push_str(&str_key);
                     res.push_str(&str_value);
+                    key_maj = true;
                 }else{
                     res.push_str(&l);
                 }    
