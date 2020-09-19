@@ -25,14 +25,14 @@ pub fn start_thread_search(
             if key_maj {
                 //already done -> simply pass lines
                 res.push_str(&l);
-            }else if l.starts_with(&str_section){
+            }else if l.to_uppercase().starts_with(&str_section.to_uppercase()){
                 //we are on line section
                 section_found = true;
                 //write it directly
                 res.push_str(&l);
             }else if section_found{
                 //section already pass
-                if l.starts_with("["){
+                if l.starts_with('['){
                     //other section
                     //-> add key , then
                     let mut res2 = String::new();
@@ -45,7 +45,7 @@ pub fn start_thread_search(
                     key_maj = true;
                     //then write line l
                     res.push_str(&l);
-                }else if l.starts_with(&str_key){
+                }else if l.to_uppercase().starts_with(&str_key.to_uppercase()){
                     //key found in section -> update
                     res.push_str(&str_key);
                     res.push_str(&str_value);
@@ -90,4 +90,3 @@ pub fn start_thread_search(
         }
     })
 }
-

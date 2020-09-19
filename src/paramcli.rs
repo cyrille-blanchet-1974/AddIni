@@ -12,6 +12,12 @@ pub struct Paramcli
     pub keep_old: bool
 }
 
+impl Default for Paramcli {
+    fn default() -> Self {
+        Paramcli::new()
+    }
+}
+
 impl Paramcli {
     pub fn new() -> Paramcli {
         let mut fic = String::new();
@@ -102,5 +108,6 @@ fn help(name:&str) {
     println!("KKKK: Key to add/update");
     println!("VVVV: value to put. If /value parameter is not set key will be removed");
     println!("/keep_old: do a .old copy of original file");
+    println!("Section and key searched without cases sensitivity");
     std::process::exit(0);
 }
