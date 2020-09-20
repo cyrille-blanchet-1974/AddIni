@@ -1,14 +1,16 @@
 # AddIni
-Add a key ina section of an ini file
-parameters: 
-   -ini file
-   -section
-   -key
-   -value
+Add a key ina section of an ini file<BR>
+parameters: <BR>
+   -ini file<BR>
+   -section<BR>
+   -key<BR>
+   -value<BR>
    
-if key exist change it
-If key do not exist create it with value
-if no value provided search and delete key
-if section do not exist create it ele add key at the end of section
-carreful with commented lines (# or ; ant start
-if removing key and section contain only this key then remove section also
+if key exist update it<BR>
+If key do not exist create it with value<BR>
+if section do not exist create it else add key at the end of section<BR>
+<BR>
+note:carreful with commented lines (# or ; ant start<BR>
+<BR>
+TODO: if no value provided search and delete key<BR>
+TODO:if removing key and section contain only this key then remove section also<BR>
