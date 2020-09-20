@@ -7,7 +7,7 @@ echo key2=val2>> ori.ini
 echo key3=val3>> ori.ini
 echo [section2]>> ori.ini
 echo key1=val1>> ori.ini
-echo Key2=val2>> ori.ini
+echo key2=val2>> ori.ini
 echo key3=val3>> ori.ini
 echo original:
 echo -------------------------------------------
@@ -45,24 +45,24 @@ echo -------------------------------------------
 pause
 echo .
 echo .
-echo Expected: no change
-%prg%  /fic:ori.ini /section:"section2" /key:"key2" /value:val8 /case_sensitive
+echo Expected: key2 maj  and key2 stay key2
+%prg%  /fic:ori.ini /section:"section2" /key:"KEY2" /value:val8
 echo -------------------------------------------
 type ori.ini
 echo -------------------------------------------
 pause
 echo .
 echo .
-echo Expected: Section2 Key2 added
-%prg%  /fic:ori.ini /section:"Section2" /key:"Key2" /value:val8 /case_sensitive
+echo Expected: key2 updated
+%prg%  /fic:ori.ini /section:"Section2" /key:"key2" /value:val9 
 echo -------------------------------------------
 type ori.ini
 echo -------------------------------------------
 pause
 echo .
 echo .
-echo Expected: Key2 of section2 change of value (and key case change also)
-%prg%  /fic:ori.ini /section:"section2" /key:"key2" /value:val9
+echo Expected: key2 of section2 updated
+%prg%  /fic:ori.ini /section:"SeCtIoN2" /key:"KeY2" /value:val10
 echo -------------------------------------------
 type ori.ini
 echo -------------------------------------------

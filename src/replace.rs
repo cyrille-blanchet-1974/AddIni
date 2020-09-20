@@ -47,7 +47,10 @@ pub fn start_thread_search(
                     res.push_str(&l);
                 }else if l.to_uppercase().starts_with(&str_key.to_uppercase()){
                     //key found in section -> update
-                    res.push_str(&str_key);
+                    //cut string 
+                    let mut line = String::from(l);
+                    let _after = line.split_off(str_key.len());
+                    res.push_str(&line);
                     res.push_str(&str_value);
                     key_maj = true;
                 }else{

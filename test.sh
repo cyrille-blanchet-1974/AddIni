@@ -11,7 +11,7 @@ echo key2=val2>> ori.ini
 echo key3=val3>> ori.ini
 echo [section2]>> ori.ini
 echo key1=val1>> ori.ini
-echo Key2=val2>> ori.ini
+echo key2=val2>> ori.ini
 echo key3=val3>> ori.ini
 echo original:
 echo -------------------------------------------
@@ -49,8 +49,8 @@ echo -------------------------------------------
 pause
 echo .
 echo .
-echo Expected: key2 maj  and Key2 became key2
-$prg  /fic:ori.ini /section:"section2" /key:"key2" /value:val8
+echo Expected: key2 maj  and key2 stay key2
+$prg  /fic:ori.ini /section:"section2" /key:"KEY2" /value:val8
 echo -------------------------------------------
 cat ori.ini
 echo -------------------------------------------
@@ -65,7 +65,7 @@ echo -------------------------------------------
 pause
 echo .
 echo .
-echo Expected: Key2 of section2 updated
+echo Expected: key2 of section2 updated
 $prg  /fic:ori.ini /section:"SeCtIoN2" /key:"KeY2" /value:val10
 echo -------------------------------------------
 cat ori.ini
