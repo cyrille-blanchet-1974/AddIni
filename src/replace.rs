@@ -1,14 +1,13 @@
-use std::thread::{spawn, JoinHandle};
 use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
-
+use std::thread::{spawn, JoinHandle};
 
 pub fn start_thread_search(
     from_read: Receiver<String>,
     to_write: Sender<String>,
-    section:&str,
-    key:&str,
-    value:&str
+    section: &str,
+    key: &str,
+    value: &str,
 ) -> JoinHandle<()> {
     let mut str_section = String::new();
     str_section.push('[');
@@ -25,14 +24,14 @@ pub fn start_thread_search(
             if key_maj {
                 //already done -> simply pass lines
                 res.push_str(&l);
-            }else if l.to_uppercase().starts_with(&str_section.to_uppercase()){
+            } else if l.to_uppercase().starts_with(&str_section.to_uppercase()) {
                 //we are on line section
                 section_found = true;
                 //write it directly
                 res.push_str(&l);
-            }else if section_found{
+            } else if section_found {
                 //section already pass
-                if l.starts_with('['){
+                if l.starts_with('[') {
                     //other section
                     //-> add key , then
                     let mut res2 = String::new();
@@ -45,18 +44,18 @@ pub fn start_thread_search(
                     key_maj = true;
                     //then write line l
                     res.push_str(&l);
-                }else if l.to_uppercase().starts_with(&str_key.to_uppercase()){
+                } else if l.to_uppercase().starts_with(&str_key.to_uppercase()) {
                     //key found in section -> update
-                    //cut string 
+                    //cut string
                     let mut line = String::from(l);
                     let _after = line.split_off(str_key.len());
                     res.push_str(&line);
                     res.push_str(&str_value);
                     key_maj = true;
-                }else{
+                } else {
                     res.push_str(&l);
-                }    
-            }else{
+                }
+            } else {
                 res.push_str(&l);
             }
             if to_write.send(res).is_err() {
@@ -65,7 +64,7 @@ pub fn start_thread_search(
             }
         }
         if section_found {
-            if !key_maj{
+            if !key_maj {
                 //section found but key not updated so section must be at end of file
                 //just add key
                 let mut res = String::new();
@@ -76,8 +75,7 @@ pub fn start_thread_search(
                     return;
                 }
             }
-        }
-        else{
+        } else {
             //add section and key
             if to_write.send(str_section).is_err() {
                 println!("error sending to write");
@@ -90,7 +88,6 @@ pub fn start_thread_search(
                 println!("error sending to write");
                 return;
             }
-
         }
     })
 }

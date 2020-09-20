@@ -9,7 +9,7 @@ pub struct Paramcli
     pub section: String,
     pub key: String,
     pub value: String,
-    pub keep_old: bool
+    pub keep_old: bool,
 }
 
 impl Default for Paramcli {
@@ -25,9 +25,12 @@ impl Paramcli {
         let mut key = String::new();
         let mut value = String::new();
         let mut keep_old = false;
-        
+
         let args: Vec<String> = env::args().skip(1).collect();
-        let name = env::args().take(1).next().unwrap_or_else(||String::from("addini"));
+        let name = env::args()
+            .take(1)
+            .next()
+            .unwrap_or_else(|| String::from("addini"));
         if args.is_empty() {
             help(&name);
         }
@@ -39,23 +42,23 @@ impl Paramcli {
             {
                 help(&name);
             }
-            if let Some(n) = get_param(&arg,String::from("/fic:")){
-                    fic = n;
-                    continue;
+            if let Some(n) = get_param(&arg, String::from("/fic:")) {
+                fic = n;
+                continue;
             }
-            if let Some(n) = get_param(&arg,String::from("/section:")){
+            if let Some(n) = get_param(&arg, String::from("/section:")) {
                 section = n;
                 continue;
             }
-            if let Some(n) = get_param(&arg,String::from("/key:")){
+            if let Some(n) = get_param(&arg, String::from("/key:")) {
                 key = n;
                 continue;
             }
-            if let Some(n) =  get_param(&arg,String::from("/value:")){
+            if let Some(n) = get_param(&arg, String::from("/value:")) {
                 value = n;
                 continue;
             }
-            if get_param(&arg,String::from("/keep_old")).is_some(){
+            if get_param(&arg, String::from("/keep_old")).is_some() {
                 keep_old = true;
                 continue;
             }
@@ -75,7 +78,7 @@ impl Paramcli {
             println!("ERROR! key is missing!");
             println!("--------------------------------------------------");
             help(&name);
-        }        
+        }
         //check if file exists
         if File::open(&fic).is_err() {
             println!("Error file {} doesn't exists or unereadable", &fic);
@@ -86,12 +89,12 @@ impl Paramcli {
             section,
             key,
             value,
-            keep_old
+            keep_old,
         }
     }
 }
 
-fn get_param(arg: &str,switch :String)->Option<String>{
+fn get_param(arg: &str, switch: String) -> Option<String> {
     if arg.to_lowercase().starts_with(&switch) {
         let mut a = String::from(arg);
         return Some(a.split_off(switch.len()));
@@ -99,8 +102,11 @@ fn get_param(arg: &str,switch :String)->Option<String>{
     None
 }
 
-fn help(name:&str) {
-    println!("syntax : {} /fic:file /section:SSSS /key:KKKK [/value:VVVV] [/keep_old]",name);
+fn help(name: &str) {
+    println!(
+        "syntax : {} /fic:file /section:SSSS /key:KKKK [/value:VVVV] [/keep_old]",
+        name
+    );
     println!("paramerters between [] are optionnals");
     println!("------------------------------------");
     println!("fic: ini file");
