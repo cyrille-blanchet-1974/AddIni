@@ -46,6 +46,10 @@ impl Paramcli {
                 fic = n;
                 continue;
             }
+            if let Some(n) = get_param(&arg, String::from("/ini:")) {
+                fic = n;
+                continue;
+            }
             if let Some(n) = get_param(&arg, String::from("/section:")) {
                 section = n;
                 continue;
@@ -54,7 +58,15 @@ impl Paramcli {
                 key = n;
                 continue;
             }
+            if let Some(n) = get_param(&arg, String::from("/cle:")) {
+                key = n;
+                continue;
+            }
             if let Some(n) = get_param(&arg, String::from("/value:")) {
+                value = n;
+                continue;
+            }
+            if let Some(n) = get_param(&arg, String::from("/valeur:")) {
                 value = n;
                 continue;
             }
