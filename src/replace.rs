@@ -47,7 +47,7 @@ pub fn start_thread_search(
                 } else if l.to_uppercase().starts_with(&str_key.to_uppercase()) {
                     //key found in section -> update
                     //cut string
-                    let mut line = String::from(l);
+                    let mut line = l;
                     let _after = line.split_off(str_key.len());
                     res.push_str(&line);
                     res.push_str(&str_value);

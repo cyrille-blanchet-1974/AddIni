@@ -31,6 +31,7 @@ impl Paramcli {
             .take(1)
             .next()
             .unwrap_or_else(|| String::from("addini"));
+        println!("{} 1.0 (2020)", name);
         if args.is_empty() {
             help(&name);
         }
